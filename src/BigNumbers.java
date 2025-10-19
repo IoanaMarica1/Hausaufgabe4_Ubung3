@@ -45,7 +45,7 @@ public class BigNumbers {
             } else {
                 yi = 0;
             }
-            if(result[i] > yi){
+            if(result[i] >= yi){
                 result[i]-= yi;
             }
             else{
@@ -67,5 +67,40 @@ public class BigNumbers {
         result =  Arrays.copyOf(result, unimportantZero+1);
         return result;
     }
+    public int[] Multiplikation(int[] x, int y){
+        int[] result = new int[x.length + 1];
+        int carry = 0;
+        for(int i=0; i<x.length; i++){
+            carry = carry + x[i] * y;
+            result[i] = carry % 10;
+            carry /= 10;
+        }
+        if(carry > 0){
+            result[x.length] = carry;
+        }
+        else{
+            result = Arrays.copyOf(result, x.length);
+        }
+        return result;
+    }
+    public int[] Division(int[] x, int y){
+        int[] result = new int[x.length];
+        int carry = 0;
+
+        for(int i = x.length - 1; i >= 0; i--){
+            int current = carry * 10 + x[i];
+            result[i] = current / y;
+            carry = current % y;
+        }
+
+        int last = result.length - 1;
+        while(last > 0 && result[last] == 0){
+            last--;
+        }
+
+        return Arrays.copyOf(result, last + 1);
+    }
+
+
 
 }
