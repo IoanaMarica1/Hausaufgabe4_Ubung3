@@ -35,4 +35,37 @@ public class BigNumbers {
         }
         return result;
     }
+    public int[] Differenz(int[] x, int[] y){
+        int len = x.length;
+        int[] result = Arrays.copyOf(x, len);
+        for(int i=0; i<len; i++){
+            int yi;
+            if (i < y.length) {
+                yi = y[i];
+            } else {
+                yi = 0;
+            }
+            if(result[i] > yi){
+                result[i]-= yi;
+            }
+            else{
+                int j=i+1;
+                while(j<len && result[j] == 0){
+                    result[j]=9;
+                    j++;
+                }
+                if(j<len){
+                    result[j]--;
+                }
+                result[i]=10+result[i]-yi;
+            }
+        }
+        int unimportantZero = result.length-1;
+        while(unimportantZero > 0 && result[unimportantZero] == 0){
+            unimportantZero--;
+        }
+        result =  Arrays.copyOf(result, unimportantZero+1);
+        return result;
+    }
+
 }
